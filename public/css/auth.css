@@ -1,0 +1,627 @@
+/* CSS برای صفحات احراز هویت - کاملاً واکنش‌گرا */
+
+:root {
+    /* رنگ‌های اصلی سایت */
+    --primary-color: #00796B;
+    --primary-dark: #004D40;
+    --primary-light: #26A69A;
+    --primary-lighter: #B2DFDB;
+    
+    /* رنگ‌های مکمل */
+    --accent-color: #A96F1F;
+    --accent-light: #E8D3A8;
+    --accent-lighter: #F6EAD0;
+    
+    /* رنگ‌های متن */
+    --text-dark: #1A1A1A;
+    --text-medium: #424242;
+    --text-light: #757575;
+    --text-on-primary: #FFFFFF;
+    
+    /* رنگ‌های پس‌زمینه */
+    --bg-white: #FFFFFF;
+    --bg-light: #F8F9FA;
+    --bg-page: #F6EAD0;
+    
+    /* رنگ‌های حالت */
+    --success-color: #4CAF50;
+    --success-light: rgba(76, 175, 80, 0.1);
+    --warning-color: #FF9800;
+    --warning-light: rgba(255, 152, 0, 0.1);
+    --danger-color: #F44336;
+    --danger-light: rgba(244, 67, 54, 0.1);
+    --info-color: #2196F3;
+    --info-light: rgba(33, 150, 243, 0.1);
+    
+    /* سایه‌ها */
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.1);
+    --shadow-xl: 0 12px 24px rgba(0, 0, 0, 0.1);
+    --shadow-2xl: 0 16px 32px rgba(0, 0, 0, 0.15);
+    
+    /* حاشیه‌ها */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 20px;
+    --radius-full: 9999px;
+    
+    /* فاصله‌ها */
+    --space-xs: 0.5rem;   /* 8px */
+    --space-sm: 0.75rem;  /* 12px */
+    --space-md: 1rem;     /* 16px */
+    --space-lg: 1.5rem;   /* 24px */
+    --space-xl: 2rem;     /* 32px */
+    --space-2xl: 3rem;    /* 48px */
+    
+    /* انیمیشن‌ها */
+    --transition-fast: 150ms ease;
+    --transition-normal: 250ms ease;
+    --transition-slow: 350ms ease;
+}
+
+/* بازنشانی و پایه */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.5;
+    color: var(--text-medium);
+    background-color: var(--bg-page);
+    min-height: 100vh;
+}
+
+/* بخش اصلی احراز هویت */
+.auth-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-md);
+    position: relative;
+    overflow-x: hidden;
+}
+
+.auth-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 300px;
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    border-radius: 0 0 50% 50%;
+    z-index: -1;
+}
+
+/* کانتینر احراز هویت */
+.auth-container {
+    width: 100%;
+    max-width: 500px;
+    background: var(--bg-white);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-2xl);
+    overflow: hidden;
+    border: 1px solid var(--accent-light);
+    animation: slideUp var(--transition-normal);
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* تب‌ها */
+.auth-tabs {
+    display: flex;
+    background: var(--bg-light);
+    border-bottom: 1px solid var(--accent-light);
+}
+
+.auth-tab {
+    flex: 1;
+    padding: var(--space-lg);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--text-light);
+    position: relative;
+    transition: all var(--transition-fast);
+    text-align: center;
+}
+
+.auth-tab:hover {
+    color: var(--primary-color);
+    background: rgba(0, 121, 107, 0.05);
+}
+
+.auth-tab.active {
+    color: var(--primary-color);
+    background: var(--bg-white);
+}
+
+.auth-tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--primary-color);
+    border-radius: var(--radius-full);
+}
+
+/* فرم‌ها */
+.auth-form {
+    padding: var(--space-2xl);
+    display: block;
+}
+
+.auth-form.hidden {
+    display: none;
+}
+
+.auth-form h2 {
+    color: var(--text-dark);
+    font-size: 1.75rem;
+    margin-bottom: var(--space-sm);
+    text-align: center;
+    font-weight: 700;
+}
+
+.auth-subtitle {
+    color: var(--text-light);
+    text-align: center;
+    margin-bottom: var(--space-xl);
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+/* گروه‌های فرم */
+.auth-group {
+    margin-bottom: var(--space-lg);
+}
+
+.auth-group label {
+    display: block;
+    margin-bottom: var(--space-xs);
+    color: var(--text-dark);
+    font-weight: 600;
+    font-size: 0.9375rem;
+}
+
+.required {
+    color: var(--danger-color);
+    margin-right: var(--space-xs);
+}
+
+.auth-group input {
+    width: 100%;
+    padding: var(--space-sm) var(--space-md);
+    border: 1px solid #E2E8F0;
+    border-radius: var(--radius-md);
+    font-size: 0.9375rem;
+    transition: all var(--transition-fast);
+    background: var(--bg-white);
+    color: var(--text-dark);
+}
+
+.auth-group input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(0, 121, 107, 0.1);
+}
+
+.auth-group input::placeholder {
+    color: #A0AEC0;
+}
+
+/* گزینه‌ها */
+.auth-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: var(--space-lg) 0;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    color: var(--text-medium);
+    font-size: 0.875rem;
+    cursor: pointer;
+    user-select: none;
+}
+
+.remember-me input {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: var(--primary-color);
+}
+
+.forgot-password {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: color var(--transition-fast);
+}
+
+.forgot-password:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+}
+
+/* قوانین و شرایط */
+.auth-terms {
+    margin: var(--space-xl) 0;
+    padding: var(--space-lg);
+    background: var(--accent-lighter);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--accent-light);
+}
+
+.terms-label {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-sm);
+    color: var(--text-medium);
+    font-size: 0.875rem;
+    cursor: pointer;
+    line-height: 1.5;
+}
+
+.terms-label input {
+    margin-top: 3px;
+    flex-shrink: 0;
+    cursor: pointer;
+    accent-color: var(--primary-color);
+}
+
+.terms-label a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color var(--transition-fast);
+}
+
+.terms-label a:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+}
+
+/* دکمه‌ها */
+.auth-btn {
+    width: 100%;
+    background: var(--primary-color);
+    color: var(--text-on-primary);
+    border: none;
+    padding: var(--space-md) var(--space-lg);
+    border-radius: var(--radius-md);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+}
+
+.auth-btn:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.auth-btn:active {
+    transform: translateY(0);
+}
+
+.auth-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* لینک تغییر حالت */
+.auth-switch {
+    text-align: center;
+    margin-top: var(--space-xl);
+    color: var(--text-light);
+    font-size: 0.9375rem;
+    padding-top: var(--space-lg);
+    border-top: 1px solid #E2E8F0;
+}
+
+.switch-link {
+    color: var(--primary-color);
+    cursor: pointer;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color var(--transition-fast);
+    margin-right: var(--space-xs);
+}
+
+.switch-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+}
+
+/* پیام‌ها */
+.auth-message {
+    margin-top: var(--space-lg);
+    padding: var(--space-md);
+    border-radius: var(--radius-md);
+    font-size: 0.875rem;
+    text-align: center;
+    animation: fadeIn var(--transition-normal);
+}
+
+.auth-message.success {
+    background: var(--success-light);
+    color: var(--success-color);
+    border: 1px solid rgba(76, 175, 80, 0.3);
+}
+
+.auth-message.error {
+    background: var(--danger-light);
+    color: var(--danger-color);
+    border: 1px solid rgba(244, 67, 54, 0.3);
+}
+
+.auth-message.info {
+    background: var(--info-light);
+    color: var(--info-color);
+    border: 1px solid rgba(33, 150, 243, 0.3);
+}
+
+.auth-message.warning {
+    background: var(--warning-light);
+    color: var(--warning-color);
+    border: 1px solid rgba(255, 152, 0, 0.3);
+}
+
+/* ============================================
+   طراحی واکنش‌گرا - تبلت (768px تا 1024px)
+   ============================================ */
+@media (max-width: 1024px) {
+    .auth-section::before {
+        height: 250px;
+    }
+    
+    .auth-container {
+        max-width: 450px;
+    }
+    
+    .auth-form {
+        padding: var(--space-xl);
+    }
+    
+    .auth-tab {
+        padding: var(--space-md);
+        font-size: 1rem;
+    }
+}
+
+/* ============================================
+   طراحی واکنش‌گرا - موبایل بزرگ (576px تا 768px)
+   ============================================ */
+@media (max-width: 768px) {
+    .auth-section {
+        padding: var(--space-sm);
+        align-items: flex-start;
+        padding-top: var(--space-xl);
+    }
+    
+    .auth-section::before {
+        height: 200px;
+        border-radius: 0 0 30% 30%;
+    }
+    
+    .auth-container {
+        margin-top: var(--space-xl);
+        border-radius: var(--radius-lg);
+    }
+    
+    .auth-tabs {
+        flex-direction: column;
+    }
+    
+    .auth-tab {
+        border-bottom: 1px solid var(--accent-light);
+        text-align: right;
+        padding: var(--space-lg) var(--space-xl);
+    }
+    
+    .auth-tab:last-child {
+        border-bottom: none;
+    }
+    
+    .auth-tab.active::after {
+        height: 0;
+        width: 4px;
+        height: 100%;
+        left: 0;
+        right: auto;
+        top: 0;
+        bottom: 0;
+    }
+    
+    .auth-form {
+        padding: var(--space-lg);
+    }
+    
+    .auth-form h2 {
+        font-size: 1.5rem;
+    }
+    
+    .auth-subtitle {
+        font-size: 0.9375rem;
+    }
+    
+    .auth-options {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--space-md);
+    }
+}
+
+/* ============================================
+   طراحی واکنش‌گرا - موبایل کوچک (تا 576px)
+   ============================================ */
+@media (max-width: 576px) {
+    .auth-section {
+        padding: var(--space-xs);
+        padding-top: var(--space-lg);
+    }
+    
+    .auth-section::before {
+        height: 150px;
+    }
+    
+    .auth-container {
+        border-radius: var(--radius-md);
+        box-shadow: var(--shadow-lg);
+    }
+    
+    .auth-tab {
+        padding: var(--space-md) var(--space-lg);
+        font-size: 0.9375rem;
+    }
+    
+    .auth-form {
+        padding: var(--space-md);
+    }
+    
+    .auth-form h2 {
+        font-size: 1.375rem;
+    }
+    
+    .auth-subtitle {
+        font-size: 0.875rem;
+        margin-bottom: var(--space-lg);
+    }
+    
+    .auth-group {
+        margin-bottom: var(--space-md);
+    }
+    
+    .auth-group input {
+        padding: var(--space-sm);
+        font-size: 0.875rem;
+    }
+    
+    .auth-btn {
+        padding: var(--space-sm) var(--space-md);
+        font-size: 0.9375rem;
+    }
+    
+    .auth-terms {
+        padding: var(--space-md);
+        margin: var(--space-lg) 0;
+    }
+    
+    .terms-label {
+        font-size: 0.8125rem;
+    }
+}
+
+/* ============================================
+   طراحی واکنش‌گرا - موبایل بسیار کوچک (تا 375px)
+   ============================================ */
+@media (max-width: 375px) {
+    .auth-section::before {
+        height: 120px;
+    }
+    
+    .auth-tab {
+        padding: var(--space-sm) var(--space-md);
+        font-size: 0.875rem;
+    }
+    
+    .auth-form {
+        padding: var(--space-sm);
+    }
+    
+    .auth-form h2 {
+        font-size: 1.25rem;
+    }
+    
+    .auth-subtitle {
+        font-size: 0.8125rem;
+    }
+    
+    .auth-group label {
+        font-size: 0.875rem;
+    }
+    
+    .auth-group input {
+        font-size: 0.8125rem;
+    }
+    
+    .remember-me,
+    .forgot-password {
+        font-size: 0.8125rem;
+    }
+    
+    .auth-btn {
+        font-size: 0.875rem;
+    }
+    
+    .auth-switch {
+        font-size: 0.8125rem;
+    }
+    
+    .auth-message {
+        font-size: 0.75rem;
+        padding: var(--space-sm);
+    }
+}
+
+/* ============================================
+   حالت لنداسکیپ موبایل
+   ============================================ */
+@media (max-height: 600px) and (orientation: landscape) {
+    .auth-section {
+        align-items: flex-start;
+        padding: var(--space-xs);
+        padding-top: var(--space-md);
+    }
+    
+    .auth-container {
+        margin-top: 0;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+    
+    .auth-form {
+        padding: var(--space-lg);
+    }
+    
+    .auth-group {
+        margin-bottom: var(--space-sm);
+    }
+}
+
+/* ============================================
+   حالت تاریک — غیرفعال است، سایت همیشه لایت مود
+   ============================================ */
+/* dark mode intentionally disabled */

@@ -1,0 +1,717 @@
+/* CSS برای صفحه داشبورد - فقط روی عناصر داخل dashboard-container تأثیر می‌گذارد */
+
+/* ===== تنظیمات پایه برای داشبورد ===== */
+.dashboard-container {
+    font-family: 'Vazirmatn', system-ui, -apple-system, sans-serif;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+    background: transparent;
+}
+
+/* ===== هدر داشبورد ===== */
+.dashboard-container .dashboard-header {
+    background: #fff;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.07);
+    border: 1px solid #E8D3A8;
+    margin-bottom: 30px;
+    position: relative;
+    overflow: hidden;
+}
+
+.dashboard-container .dashboard-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #00796B, #26A69A);
+}
+
+.dashboard-container .dashboard-header-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.dashboard-container .dashboard-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 4px solid #fff;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    position: relative;
+    background: linear-gradient(135deg, #26A69A, #00796B);
+}
+
+.dashboard-container .dashboard-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.dashboard-container .avatar-placeholder-dashboard {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 2.5rem;
+}
+
+.dashboard-container .dashboard-info {
+    text-align: center;
+}
+
+.dashboard-container .dashboard-info h1 {
+    color: #2d1f14;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.dashboard-container .dashboard-email {
+    color: #5c483a;
+    font-size: 1rem;
+    margin-bottom: 12px;
+    direction: ltr;
+}
+
+.dashboard-container .user-role-badge {
+    display: inline-block;
+    background: rgba(0, 121, 107, 0.1);
+    padding: 6px 15px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #00796B;
+    border: 1px solid rgba(0, 121, 107, 0.3);
+    margin-bottom: 20px;
+}
+
+.dashboard-container .dashboard-stats {
+    display: flex;
+    gap: 30px;
+    margin-top: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.dashboard-container .dashboard-stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    min-width: 100px;
+}
+
+.dashboard-container .dashboard-stat-value {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #00796B;
+}
+
+.dashboard-container .dashboard-stat-label {
+    font-size: 0.85rem;
+    color: #5c483a;
+    font-weight: 500;
+}
+
+/* ===== ناوبری داشبورد ===== */
+.dashboard-container .dashboard-nav {
+    margin-bottom: 40px;
+}
+
+.dashboard-container .dashboard-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    background: #fff;
+    padding: 15px;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border: 1px solid #E8D3A8;
+}
+
+.dashboard-container .dashboard-tab {
+    padding: 12px 25px;
+    background: none;
+    border: 2px solid transparent;
+    border-radius: 25px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #3d2e22;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+    text-decoration: none;
+}
+
+.dashboard-container .dashboard-tab:hover {
+    background: #F6EAD0;
+    color: #00796B;
+    transform: translateY(-2px);
+}
+
+.dashboard-container .dashboard-tab.active {
+    background: #00796B;
+    color: white;
+    border-color: #00796B;
+    box-shadow: 0 4px 12px rgba(0, 121, 107, 0.2);
+}
+
+.dashboard-container .dashboard-tab i {
+    font-size: 1.1rem;
+}
+
+/* دکمه خروج */
+.dashboard-container .dashboard-tab.logout {
+    margin-right: auto; /* در RTL به سمت چپ می‌رود — جدا از بقیه تب‌ها */
+    color: #c0392b;
+    border-color: transparent;
+}
+
+.dashboard-container .dashboard-tab.logout:hover {
+    background: #fdecea;
+    color: #c0392b;
+    border-color: #c0392b;
+    transform: translateY(-2px);
+}
+
+/* موبایل: دکمه خروج پهنای کامل و زیر تب‌ها */
+@media (max-width: 768px) {
+    .dashboard-container .dashboard-tab.logout {
+        margin-right: 0;
+        order: 99; /* همیشه آخر */
+        width: 100%;
+        justify-content: center;
+        border: 2px solid #c0392b;
+        border-radius: 25px;
+    }
+}
+
+@media (max-width: 480px) {
+    .dashboard-container .dashboard-tab.logout {
+        min-width: unset;
+        width: 100%;
+        flex-shrink: 0;
+        flex-basis: 100%;
+    }
+}
+
+/* ===== محتوای داشبورد ===== */
+.dashboard-container .dashboard-content {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.dashboard-container .dashboard-tab-content {
+    display: none;
+    animation: dashboard-fadeIn 0.3s ease;
+}
+
+.dashboard-container .dashboard-tab-content.active {
+    display: block;
+}
+
+@keyframes dashboard-fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===== فرم‌های داشبورد ===== */
+.dashboard-container .dashboard-form {
+    background: #fff;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+    border: 1px solid #E8D3A8;
+}
+
+.dashboard-container .form-group-dashboard {
+    margin-bottom: 20px;
+}
+
+.dashboard-container .form-group-dashboard label {
+    display: block;
+    margin-bottom: 8px;
+    color: #2d1f14;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.dashboard-container .required-dashboard {
+    color: #F44336;
+    margin-right: 4px;
+}
+
+/* ورودی‌های فرم */
+.dashboard-container .dashboard-input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid #E8D3A8;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+    background: #fff;
+    color: #2d1f14;
+    font-family: 'Vazirmatn', inherit;
+}
+
+.dashboard-container .dashboard-input:focus {
+    outline: none;
+    border-color: #00796B;
+    box-shadow: 0 0 0 3px rgba(0, 121, 107, 0.1);
+}
+
+/* ردیف‌های فرم */
+.dashboard-container .form-row-dashboard {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+/* آپلود آواتار */
+.dashboard-container .avatar-upload-dashboard {
+    border: 2px dashed #E8D3A8;
+    border-radius: 15px;
+    padding: 25px;
+    text-align: center;
+    background: #F6EAD0;
+}
+
+.dashboard-container .avatar-preview-dashboard {
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 20px;
+    border: 3px solid #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-container .avatar-preview-dashboard img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.dashboard-container .avatar-preview-empty-dashboard {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #B2DFDB, #E8D3A8);
+    color: #2d1f14;
+}
+
+.dashboard-container .avatar-preview-empty-dashboard i {
+    font-size: 2rem;
+    margin-bottom: 8px;
+    color: #00796B;
+}
+
+.dashboard-container .btn-upload-dashboard {
+    background: #00796B;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.dashboard-container .btn-upload-dashboard:hover {
+    background: #004D40;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 121, 107, 0.2);
+}
+
+.dashboard-container .upload-note-dashboard {
+    color: #5c483a;
+    font-size: 0.85rem;
+    margin-top: 12px;
+}
+
+/* دکمه‌های داشبورد */
+.dashboard-container .form-actions-dashboard {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 30px;
+    padding-top: 30px;
+    border-top: 2px solid #E8D3A8;
+}
+
+.dashboard-container .btn-dashboard-primary,
+.dashboard-container .btn-dashboard-secondary {
+    padding: 12px 25px;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 160px;
+    justify-content: center;
+}
+
+.dashboard-container .btn-dashboard-primary {
+    background: linear-gradient(135deg, #00796B, #26A69A);
+    color: white;
+    box-shadow: 0 4px 12px rgba(0, 121, 107, 0.2);
+}
+
+.dashboard-container .btn-dashboard-primary:hover {
+    background: linear-gradient(135deg, #004D40, #00796B);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 121, 107, 0.3);
+}
+
+.dashboard-container .btn-dashboard-secondary {
+    background: #fff;
+    color: #3d2e22;
+    border: 2px solid #E8D3A8;
+}
+
+.dashboard-container .btn-dashboard-secondary:hover {
+    background: #F6EAD0;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* قدرت رمز عبور */
+.dashboard-container .password-strength-dashboard {
+    background: #F6EAD0;
+    border-radius: 12px;
+    padding: 20px;
+    margin: 20px 0;
+    border: 1px solid #E8D3A8;
+}
+
+.dashboard-container .password-strength-meter-dashboard {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 10px;
+}
+
+.dashboard-container .strength-bar-dashboard {
+    flex: 1;
+    height: 6px;
+    background: #E8D3A8;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.dashboard-container .strength-level-dashboard {
+    height: 100%;
+    width: 0%;
+    border-radius: 3px;
+    background: #F44336;
+    transition: all 0.3s ease;
+}
+
+.dashboard-container .strength-label-dashboard {
+    font-size: 0.85rem;
+    font-weight: 600;
+    min-width: 60px;
+    text-align: center;
+}
+
+.dashboard-container .password-tips-dashboard {
+    color: #5c483a;
+    font-size: 0.85rem;
+    line-height: 1.5;
+}
+
+/* سفارش‌ها */
+.dashboard-container .orders-container-dashboard {
+    background: #fff;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-container .orders-filters-dashboard {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+    background: #F6EAD0;
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid #E8D3A8;
+}
+
+.dashboard-container .filter-group-dashboard {
+    flex: 1;
+}
+
+.dashboard-container .filter-group-dashboard label {
+    display: block;
+    margin-bottom: 6px;
+    color: #2d1f14;
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+.dashboard-container .no-orders-dashboard {
+    text-align: center;
+    padding: 50px 20px;
+    color: #5c483a;
+}
+
+.dashboard-container .no-orders-dashboard i {
+    font-size: 3rem;
+    color: #26A69A;
+    margin-bottom: 20px;
+    opacity: 0.5;
+}
+
+.dashboard-container .no-orders-dashboard h3 {
+    color: #2d1f14;
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+}
+
+.dashboard-container .no-orders-dashboard p {
+    max-width: 450px;
+    margin: 0 auto 25px;
+    font-size: 1rem;
+}
+
+.dashboard-container .orders-stats-dashboard {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.dashboard-container .stat-card-dashboard {
+    background: #F6EAD0;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    border: 1px solid #E8D3A8;
+    transition: all 0.2s ease;
+}
+
+.dashboard-container .stat-card-dashboard:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-color: #26A69A;
+}
+
+.dashboard-container .stat-icon-dashboard {
+    width: 45px;
+    height: 45px;
+    background: linear-gradient(135deg, #00796B, #26A69A);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 15px;
+}
+
+.dashboard-container .stat-icon-dashboard i {
+    color: white;
+    font-size: 1.2rem;
+}
+
+.dashboard-container .stat-number-dashboard {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #00796B;
+    margin-bottom: 5px;
+}
+
+.dashboard-container .stat-text-dashboard {
+    color: #5c483a;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+/* پیام‌های تأیید */
+.dashboard-container .verified-indicator-dashboard,
+.dashboard-container .unverified-indicator-dashboard {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.dashboard-container .verified-indicator-dashboard {
+    background: rgba(76, 175, 80, 0.1);
+    color: #4CAF50;
+    border: 1px solid rgba(76, 175, 80, 0.3);
+}
+
+.dashboard-container .unverified-indicator-dashboard {
+    background: rgba(255, 152, 0, 0.1);
+    color: #FF9800;
+    border: 1px solid rgba(255, 152, 0, 0.3);
+}
+
+/* ===== واکنش‌گرایی ===== */
+@media (max-width: 768px) {
+    .dashboard-container {
+        margin: 20px auto;
+        padding: 15px;
+    }
+    
+    .dashboard-container .dashboard-header {
+        padding: 20px;
+        margin-bottom: 30px;
+    }
+    
+    .dashboard-container .dashboard-avatar {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .dashboard-container .dashboard-info h1 {
+        font-size: 1.5rem;
+    }
+    
+    .dashboard-container .dashboard-stats {
+        gap: 20px;
+    }
+    
+    .dashboard-container .dashboard-stat-item {
+        min-width: 80px;
+    }
+    
+    .dashboard-container .dashboard-tabs {
+        flex-wrap: wrap;
+        padding: 12px;
+    }
+    
+    .dashboard-container .dashboard-tab {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+        min-width: 140px;
+        justify-content: center;
+    }
+    
+    .dashboard-container .form-row-dashboard {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .dashboard-container .form-actions-dashboard {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .dashboard-container .btn-dashboard-primary,
+    .dashboard-container .btn-dashboard-secondary {
+        width: 100%;
+        min-width: auto;
+    }
+    
+    .dashboard-container .orders-filters-dashboard {
+        flex-direction: column;
+        gap: 12px;
+    }
+    
+    .dashboard-container .orders-stats-dashboard {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .dashboard-container .dashboard-form {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .dashboard-container {
+        margin: 10px auto;
+        padding: 10px;
+    }
+    
+    .dashboard-container .dashboard-header {
+        padding: 15px;
+        margin-bottom: 25px;
+    }
+    
+    .dashboard-container .dashboard-avatar {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .dashboard-container .avatar-placeholder-dashboard {
+        font-size: 2rem;
+    }
+    
+    .dashboard-container .dashboard-info h1 {
+        font-size: 1.3rem;
+    }
+    
+    .dashboard-container .dashboard-tabs {
+        justify-content: flex-start;
+        overflow-x: auto;
+        flex-wrap: wrap; /* اجازه می‌دهد دکمه خروج به خط بعد برود */
+    }
+    
+    .dashboard-container .dashboard-tab {
+        padding: 8px 15px;
+        font-size: 0.85rem;
+        min-width: 120px;
+    }
+    
+    .dashboard-container .dashboard-tab span {
+        display: none;
+    }
+    
+    .dashboard-container .dashboard-tab i {
+        margin: 0;
+        font-size: 1rem;
+    }
+    
+    .dashboard-container .orders-stats-dashboard {
+        grid-template-columns: 1fr;
+    }
+    
+    .dashboard-container .stat-card-dashboard {
+        display: flex;
+        align-items: center;
+        text-align: left;
+        gap: 15px;
+    }
+    
+    .dashboard-container .stat-icon-dashboard {
+        margin: 0;
+        flex-shrink: 0;
+    }
+}
