@@ -50,7 +50,7 @@ include 'views/header.php';
         <span class="card-label">مشاهیر</span>
     </a>
 
-    <a class="card" href="#">
+    <a class="card" href="/Kavian/places">
         <img class="icon" src="/Kavian/public/images/amaken.png" alt="اماکن">
         <span class="card-label">اماکن</span>
     </a>
