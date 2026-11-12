@@ -6,7 +6,7 @@ $current_lang = (strpos($_SERVER['REQUEST_URI'], '/persian/') !== false) ? 'fa' 
 $dir = ($current_lang === 'fa') ? 'rtl' : 'ltr';
 $is_fa = ($current_lang === 'fa');
 
-define('SITE_NAME', $current_lang === 'fa' ? 'مشاهیر' : 'Mashahir');
+define('SITE_NAME', $current_lang === 'fa' ? 'اماکن' : 'Amaken');
 
 $lang_texts = [
     'en' => [
@@ -29,7 +29,9 @@ $lang_texts = [
         'favorites' => 'Favorite Celebrities',
         'history' => 'History',
         'settings' => 'Settings',
-        'help' => 'Help'
+        'help' => 'Help',
+        'places' => 'Places',
+        'place' => 'Place'
     ],
     'fa' => [
         'home' => 'صفحه اصلی',
@@ -39,8 +41,8 @@ $lang_texts = [
         'contact' => 'تماس با ما',
         'login' => 'ورود',
         'signup' => 'ثبت نام',
-        'search' => 'جستجوی مشاهیر...',
-        'footer' => 'تمامی حقوق برای مشاهیر ایرانی محفوظ است.',
+        'search' => 'جستجوی اماکن...',
+        'footer' => 'تمامی حقوق برای اماکن ایرانی محفوظ است.',
         'quick_access' => 'دسترسی سریع',
         'categories' => 'دسته‌بندی‌ها',
         'contact_us' => 'تماس با ما',
@@ -48,10 +50,12 @@ $lang_texts = [
         'apply' => 'اعمال فیلتر',
         'dashboard' => 'داشبورد',
         'my_library' => 'کتابخانه من',
-        'favorites' => 'مشاهیر محبوب',
+        'favorites' => 'اماکن محبوب',
         'history' => 'تاریخچه',
         'settings' => 'تنظیمات',
-        'help' => 'راهنما'
+        'help' => 'راهنما',
+        'places' => 'اماکن',
+        'place' => 'مکان',
     ]
 ];
 

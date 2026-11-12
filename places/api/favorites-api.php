@@ -17,10 +17,10 @@ function ensureTable(PDO $pdo): void {
     $pdo->exec("CREATE TABLE IF NOT EXISTS `user_favorites` (
         `id`           int(11)   NOT NULL AUTO_INCREMENT,
         `user_id`      int(11)   NOT NULL,
-        `celebrity_id` int(11)   NOT NULL,
+        `place_id` int(11)   NOT NULL,
         `created_at`   timestamp NOT NULL DEFAULT current_timestamp(),
         PRIMARY KEY (`id`),
-        UNIQUE KEY `uq_user_celebrity` (`user_id`,`celebrity_id`)
+        UNIQUE KEY `uq_user_place` (`user_id`,`place_id`)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci");
 }
 
@@ -55,7 +55,7 @@ if ($method === 'GET' && $action === 'list') {
             mc.job_en,
             uf.created_at AS favorited_at
         FROM user_favorites uf
-        JOIN mashahir_celebrities mc ON mc.id = uf.celebrity_id
+        JOIN palces mc ON mc.id = uf.place_id
         WHERE uf.user_id = ? AND mc.is_active = 1
         ORDER BY uf.created_at DESC
     ");
@@ -66,7 +66,7 @@ if ($method === 'GET' && $action === 'list') {
         return [
             'id'           => (int)$r['id'],
             'name'         => $lang === 'fa' ? $r['name_fa'] : ($r['name_en'] ?: $r['name_fa']),
-            'image'        => $r['image'] ? '/Kavian/mashahir/public/img/' . $r['image'] : '/Kavian/mashahir/public/img/s.png',
+            'image'        => $r['image'] ? '/Kavian/places/public/img/' . $r['image'] : '/Kavian/places/public/img/s.png',
             'job'          => $lang === 'fa' ? $r['job_fa'] : ($r['job_en'] ?: $r['job_fa']),
             'favorited_at' => $r['favorited_at'],
         ];
@@ -78,12 +78,12 @@ if ($method === 'GET' && $action === 'list') {
 
 // ── GET check ────────────────────────────────────────────────
 if ($method === 'GET' && $action === 'check') {
-    $celebId = (int)($_GET['celebrity_id'] ?? 0);
+    $celebId = (int)($_GET['place_id'] ?? 0);
     if (!$celebId) {
-        echo json_encode(['success' => false, 'error' => 'celebrity_id لازم است.'], JSON_UNESCAPED_UNICODE);
+        echo json_encode(['success' => false, 'error' => 'place_id لازم است.'], JSON_UNESCAPED_UNICODE);
         exit;
     }
-    $stmt = $pdo->prepare("SELECT id FROM user_favorites WHERE user_id=? AND celebrity_id=?");
+    $stmt = $pdo->prepare("SELECT id FROM user_favorites WHERE user_id=? AND place_id=?");
     $stmt->execute([$userId, $celebId]);
     echo json_encode(['success' => true, 'is_favorite' => (bool)$stmt->fetch()], JSON_UNESCAPED_UNICODE);
     exit;
@@ -91,15 +91,15 @@ if ($method === 'GET' && $action === 'check') {
 
 // ── POST toggle ───────────────────────────────────────────────
 if ($method === 'POST' && $action === 'toggle') {
-    $celebId = (int)($_POST['celebrity_id'] ?? 0);
+    $celebId = (int)($_POST['place_id'] ?? 0);
     if (!$celebId) {
         http_response_code(400);
-        echo json_encode(['success' => false, 'error' => 'celebrity_id لازم است.'], JSON_UNESCAPED_UNICODE);
+        echo json_encode(['success' => false, 'error' => 'place_id لازم است.'], JSON_UNESCAPED_UNICODE);
         exit;
     }
 
     // بررسی وجود مشهور
-    $check = $pdo->prepare("SELECT id FROM mashahir_celebrities WHERE id=? AND is_active=1");
+    $check = $pdo->prepare("SELECT id FROM places WHERE id=? AND is_active=1");
     $check->execute([$celebId]);
     if (!$check->fetch()) {
         http_response_code(404);
@@ -107,16 +107,16 @@ if ($method === 'POST' && $action === 'toggle') {
         exit;
     }
 
-    $exists = $pdo->prepare("SELECT id FROM user_favorites WHERE user_id=? AND celebrity_id=?");
+    $exists = $pdo->prepare("SELECT id FROM user_favorites WHERE user_id=? AND place_id=?");
     $exists->execute([$userId, $celebId]);
 
     if ($exists->fetch()) {
         // حذف
-        $pdo->prepare("DELETE FROM user_favorites WHERE user_id=? AND celebrity_id=?")->execute([$userId, $celebId]);
+        $pdo->prepare("DELETE FROM user_favorites WHERE user_id=? AND place_id=?")->execute([$userId, $celebId]);
         $added = false;
     } else {
         // افزودن
-        $pdo->prepare("INSERT INTO user_favorites (user_id, celebrity_id) VALUES (?,?)")->execute([$userId, $celebId]);
+        $pdo->prepare("INSERT INTO user_favorites (user_id, place_id) VALUES (?,?)")->execute([$userId, $celebId]);
         $added = true;
     }
 

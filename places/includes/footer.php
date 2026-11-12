@@ -7,7 +7,7 @@ $current_lang = (strpos($_SERVER['REQUEST_URI'], '/persian/') !== false) ? 'fa' 
             <div class="col-12 col-md-4">
                 <div class="footer-brand">
                     <h4><?= SITE_NAME ?></h4>
-                    <p><?= $current_lang === 'fa' ? 'یک مرجع جامع برای آشنایی با بزرگان، دانشمندان، شاعران و چهره‌های تأثیرگذار ایران' : 'A comprehensive reference for learning about the greats, scientists, poets, artists, and influential figures of Iran.' ?></p>
+                    <p><?= $current_lang === 'fa' ? 'یک مرجع بزرگ برای آشنایی با اماکن زیبا و تاریخی ایران بزرگ' : 'A comprehensive reference for learning about the beautiful and historical places in Iran.' ?></p>
                 </div>
             </div>
             <div class="col-6 col-md-2">
@@ -25,17 +25,17 @@ $current_lang = (strpos($_SERVER['REQUEST_URI'], '/persian/') !== false) ? 'fa' 
                 <div class="footer-links">
                     <h5><?= t('categories') ?></h5>
                     <ul>
-                        <li><a href="#"><?= $current_lang === 'fa' ? 'دانشمندان' : 'Scientists' ?></a></li>
-                        <li><a href="#"><?= $current_lang === 'fa' ? 'شاعران' : 'Poets' ?></a></li>
-                        <li><a href="#"><?= $current_lang === 'fa' ? 'هنرمندان' : 'Artists' ?></a></li>
-                        <li><a href="#"><?= $current_lang === 'fa' ? 'قهرمانان' : 'Heroes' ?></a></li>
+                        <li><a href="#"><?= $current_lang === 'fa' ? 'طبیعی' : 'Natural' ?></a></li>
+                        <li><a href="#"><?= $current_lang === 'fa' ? 'تاریخی' : 'Historical' ?></a></li>
+                        <li><a href="#"><?= $current_lang === 'fa' ? 'فرهنگی' : 'Cultural' ?></a></li>
+                        <li><a href="#"><?= $current_lang === 'fa' ? 'گردشگری' : 'Tourist' ?></a></li>
                     </ul>
                 </div>
             </div>
             <div class="col-12 col-md-3">
                 <div class="footer-contact">
                     <h5><?= t('contact_us') ?></h5>
-                    <p>Email: info@iraniancelebs.com</p>
+                    <p>Email: info@iranianplaces.com</p>
                     <p>Phone: +98-21-00000000</p>
                     <div class="footer-social">
                         <a href="#"><i class="bi bi-instagram"></i></a>

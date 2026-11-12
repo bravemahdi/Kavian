@@ -10,7 +10,7 @@ $catSql = "SELECT
     name_fa,
     image,
     sort_order
-FROM mashahir_categories 
+FROM places_categories 
 WHERE is_active = 1 
 ORDER BY sort_order ASC";
 
@@ -18,14 +18,14 @@ $catStmt = $pdo->query($catSql);
 $categories = $catStmt->fetchAll(PDO::FETCH_ASSOC);
 
 $profileUrl = $is_fa
-    ? '/Kavian/mashahir/persian/profile.php'
-    : '/Kavian/mashahir/english/profile.php';
+    ? '/Kavian/places/persian/profile.php'
+    : '/Kavian/places/english/profile.php';
 ?>
 
 <section class="category-section py-5">
     <div class="container">
         <div class="section-title text-center mb-5">
-            <h1><?= $is_fa ? 'دسته‌بندی مشاهیر ایرانی' : 'Categories of Iranian Celebrities' ?></h1>
+            <h1><?= $is_fa ? 'دسته بندی اماکن ایران' : 'Categories of Iranian Places' ?></h1>
         </div>
         <div class="row g-4">
             <?php foreach ($categories as $category):

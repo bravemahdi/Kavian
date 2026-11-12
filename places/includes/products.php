@@ -30,8 +30,8 @@ LIMIT 6";
 $productStmt = $pdo->query($productSql);
 $products = $productStmt->fetchAll(PDO::FETCH_ASSOC);
 
-$title = $is_fa ? 'محصولات مشاهیر ایران' : 'Iranian Celebrities Products';
-$desc  = $is_fa ? 'مجموعه‌ای از بهترین کتاب‌ها و محصولات فرهنگی' : 'A collection of the best books and cultural products';
+$title = $is_fa ? 'رستوران های منتخب و پیشنهادی' : 'Selected and recommended restaurants';
+$desc  = $is_fa ? 'مجموعه ای از بهترین رستوران های ایرانی' : 'A collection of the best Iranian resturants';
 
 function getBadge($index) {
     $badges = ['Bestseller', 'Popular', 'New', 'Special'];

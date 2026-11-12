@@ -95,14 +95,14 @@ if ($is_logged_in) {
 
     <link
         rel="stylesheet"
-        href="/Kavian/mashahir/public/css/bootstrap.rtl.min.css"
+        href="/Kavian/places/public/css/bootstrap.rtl.min.css"
     >
 
 
     <!-- Bootstrap Bundle JS -->
 
     <script
-        src="/Kavian/mashahir/public/js/bootstrap.bundle.min.js"
+        src="/Kavian/places/public/js/bootstrap.bundle.min.js"
         defer
     ></script>
 
@@ -111,7 +111,7 @@ if ($is_logged_in) {
 
     <link
         rel="stylesheet"
-        href="/Kavian/mashahir/public/css/bootstrap-icons.min.css"
+        href="/Kavian/places/public/css/bootstrap-icons.min.css"
     >
 
 
@@ -119,7 +119,7 @@ if ($is_logged_in) {
 
     <link
         rel="stylesheet"
-        href="/Kavian/mashahir/public/css/all.min.css"
+        href="/Kavian/places/public/css/all.min.css"
     >
 
 
@@ -140,10 +140,10 @@ if ($is_logged_in) {
             font-family: bootstrap-icons;
 
             src:
-                url("/Kavian/mashahir/public/fonts/bootstrap-icons.woff2")
+                url("/Kavian/places/public/fonts/bootstrap-icons.woff2")
                 format("woff2"),
 
-                url("/Kavian/mashahir/public/fonts/bootstrap-icons.woff")
+                url("/Kavian/places/public/fonts/bootstrap-icons.woff")
                 format("woff");
 
         }
@@ -302,10 +302,10 @@ if ($is_logged_in) {
 
                         <a
                             class="nav-link"
-                            id="navCelebrities"
+                            id="navPlaces"
                             href="profile.php"
                         >
-                            <?= t('celebrities') ?>
+                            <?= t('places') ?>
                         </a>
 
                     </li>
@@ -634,8 +634,8 @@ if ($is_logged_in) {
     var navHome =
         document.getElementById('navHome');
 
-    var navCelebrities =
-        document.getElementById('navCelebrities');
+    var navPlaces =
+        document.getElementById('navPlaces');
 
     var navProducts =
         document.getElementById('navProducts');
@@ -659,9 +659,9 @@ if ($is_logged_in) {
     if (
         fullUrl.indexOf('index.php') !== -1 ||
         path === '/' ||
-        path === '/Kavian/mashahir/' ||
-        path === '/Kavian/mashahir/persian/' ||
-        path === '/Kavian/mashahir/english/'
+        path === '/Kavian/places/' ||
+        path === '/Kavian/places/persian/' ||
+        path === '/Kavian/places/english/'
     ) {
 
         if (navHome) {
@@ -675,8 +675,8 @@ if ($is_logged_in) {
         fullUrl.indexOf('profile.php') !== -1
     ) {
 
-        if (navCelebrities) {
-            navCelebrities.classList.add('active');
+        if (navPlaces) {
+            navPlaces.classList.add('active');
         }
 
     }
@@ -737,8 +737,8 @@ if ($is_logged_in) {
 window.SEARCH_CONFIG = {
     IS_FA:       <?= $is_fa ? 'true' : 'false' ?>,
     LANG:        '<?= $current_lang ?>',
-    PROFILE_URL: '<?= $is_fa ? '/Kavian/mashahir/persian/profile.php' : '/Kavian/mashahir/english/profile.php' ?>',
-    SEARCH_API:  '/Kavian/mashahir/api/search-celebrities.php',
+    PROFILE_URL: '<?= $is_fa ? '/Kavian/places/persian/profile.php' : '/Kavian/places/english/profile.php' ?>',
+    SEARCH_API:  '/Kavian/places/api/search-places.php',
     TEXT: {
         no_results:  '<?= $is_fa ? 'نتیجه‌ای یافت نشد' : 'No results found' ?>',
         more:        '<?= $is_fa ? 'مشاهده همه نتایج' : 'See all results' ?>',
@@ -746,12 +746,12 @@ window.SEARCH_CONFIG = {
     }
 };
 </script>
-<script src="/Kavian/mashahir/public/js/search.js" defer></script>
+<script src="/Kavian/places/public/js/search.js" defer></script>
 
 <script>
 // ─── badge سبد خرید ─────────────────────────────────────────
 (function loadCartBadge() {
-    fetch('/Kavian/mashahir/api/cart-api.php?action=count')
+    fetch('/Kavian/places/api/cart-api.php?action=count')
         .then(function(r) { return r.json(); })
         .then(function(data) {
             if (data.success && data.count > 0) {
@@ -772,7 +772,7 @@ window.SEARCH_CONFIG = {
 document.addEventListener('DOMContentLoaded', function() {
 
     var IS_FA = <?= $is_fa ? 'true' : 'false' ?>;
-    var PROFILE_URL = '<?= $is_fa ? '/Kavian/mashahir/persian/profile.php' : '/Kavian/mashahir/english/profile.php' ?>';
+    var PROFILE_URL = '<?= $is_fa ? '/Kavian/places/persian/profile.php' : '/Kavian/places/english/profile.php' ?>';
     var LANG = IS_FA ? 'fa' : 'en';
 
     // ─── بستن navbar ───────────────────────────────────────
@@ -825,7 +825,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // ─── بارگذاری badge ها از API ─────────────────────────
-    fetch('/Kavian/mashahir/api/user-stats.php')
+    fetch('/Kavian/places/api/user-stats.php')
         .then(function(r) { return r.json(); })
         .then(function(d) {
             if (!d.success || !d.logged_in) return;
@@ -836,11 +836,11 @@ document.addEventListener('DOMContentLoaded', function() {
         .catch(function() {});
 
     // ─── ثبت بازدید (تاریخچه) — از profile.php صدا میشه ──
-    window.mashahirTrackHistory = function(celebrity) {
+    window.placesTrackHistory = function(place) {
         var fd = new FormData();
         fd.append('action',       'add');
-        fd.append('celebrity_id', celebrity.id);
-        fetch('/Kavian/mashahir/api/history-api.php', { method: 'POST', body: fd })
+        fd.append('place_id', place.id);
+        fetch('/Kavian/places/api/history-api.php', { method: 'POST', body: fd })
             .then(function(r) { return r.json(); })
             .then(function(d) {
                 if (d.success) {
@@ -856,11 +856,11 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
     // ─── toggle علاقه‌مندی — از profile.php صدا میشه ──────
-    window.mashahirToggleFavorite = function(celebrity, callback) {
+    window.placesToggleFavorite = function(place, callback) {
         var fd = new FormData();
         fd.append('action',       'toggle');
-        fd.append('celebrity_id', celebrity.id);
-        fetch('/Kavian/mashahir/api/favorites-api.php', { method: 'POST', body: fd })
+        fd.append('place_id', place.id);
+        fetch('/Kavian/places/api/favorites-api.php', { method: 'POST', body: fd })
             .then(function(r) { return r.json(); })
             .then(function(d) {
                 if (d.success) {
@@ -872,8 +872,8 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
     // ─── check favorite — از profile.php صدا میشه ─────────
-    window.mashahirIsFavorite = function(id, callback) {
-        fetch('/Kavian/mashahir/api/favorites-api.php?action=check&celebrity_id=' + id)
+    window.placesIsFavorite = function(id, callback) {
+        fetch('/Kavian/places/api/favorites-api.php?action=check&place_id=' + id)
             .then(function(r) { return r.json(); })
             .then(function(d) {
                 if (typeof callback === 'function') callback(d.is_favorite || false);
@@ -887,7 +887,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!container) return;
         container.innerHTML = '<div class="offcanvas-subpanel-loading"><div class="spinner-border spinner-border-sm text-success"></div></div>';
 
-        fetch('/Kavian/mashahir/api/favorites-api.php?action=list&lang=' + LANG)
+        fetch('/Kavian/places/api/favorites-api.php?action=list&lang=' + LANG)
             .then(function(r) { return r.json(); })
             .then(function(d) {
                 if (!d.success || d.data.length === 0) {
@@ -899,7 +899,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
                 container.innerHTML = d.data.map(function(c) {
                     return '<a class="offcanvas-subpanel-item" href="' + PROFILE_URL + '?id=' + c.id + '">' +
-                        '<img src="' + escHtmlOC(c.image) + '" onerror="this.src=\'/Kavian/mashahir/public/img/s.png\'">' +
+                        '<img src="' + escHtmlOC(c.image) + '" onerror="this.src=\'/Kavian/places/public/img/s.png\'">' +
                         '<span>' + escHtmlOC(c.name) + '</span>' +
                         '<button class="offcanvas-fav-remove" onclick="removeFavorite(event,' + c.id + ')" title="' + (IS_FA ? 'حذف' : 'Remove') + '">' +
                             '<i class="bi bi-x"></i>' +
@@ -919,7 +919,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!container) return;
         container.innerHTML = '<div class="offcanvas-subpanel-loading"><div class="spinner-border spinner-border-sm text-success"></div></div>';
 
-        fetch('/Kavian/mashahir/api/history-api.php?action=list&lang=' + LANG + '&limit=20')
+        fetch('/Kavian/places/api/history-api.php?action=list&lang=' + LANG + '&limit=20')
             .then(function(r) { return r.json(); })
             .then(function(d) {
                 if (!d.logged_in) {
@@ -938,7 +938,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
                 container.innerHTML = d.data.map(function(c) {
                     return '<a class="offcanvas-subpanel-item" href="' + PROFILE_URL + '?id=' + c.id + '">' +
-                        '<img src="' + escHtmlOC(c.image) + '" onerror="this.src=\'/Kavian/mashahir/public/img/s.png\'">' +
+                        '<img src="' + escHtmlOC(c.image) + '" onerror="this.src=\'/Kavian/places/public/img/s.png\'">' +
                         '<span>' + escHtmlOC(c.name) + '</span>' +
                     '</a>';
                 }).join('');
@@ -955,8 +955,8 @@ document.addEventListener('DOMContentLoaded', function() {
         e.stopPropagation();
         var fd = new FormData();
         fd.append('action', 'toggle');
-        fd.append('celebrity_id', id);
-        fetch('/Kavian/mashahir/api/favorites-api.php', { method: 'POST', body: fd })
+        fd.append('place_id', id);
+        fetch('/Kavian/places/api/favorites-api.php', { method: 'POST', body: fd })
             .then(function(r) { return r.json(); })
             .then(function(d) {
                 if (d.success) {
@@ -1022,5 +1022,4 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 300);
 });
 </script>
-
 

@@ -6,14 +6,14 @@ global $pdo;
 
 $heroSql = "SELECT 
     hc.id,
-    hc.celebrity_id,
+    hc.place_id,
     hc.title_en as title_en,
     hc.title_fa as title_fa,
     hc.subtitle_en as subtitle_en,
     hc.subtitle_fa as subtitle_fa,
     hc.image,
     hc.link_url
-FROM hero_carousel hc
+FROM places_hero_carousel hc
 WHERE hc.is_active = 1 
 ORDER BY hc.sort_order ASC";
 
@@ -23,16 +23,16 @@ $heroes = $heroStmt->fetchAll(PDO::FETCH_ASSOC);
 // چک کن کدام celebrity_id ها واقعاً در دیتابیس وجود دارن
 $existingIds = [];
 if (!empty($heroes)) {
-    $ids = array_filter(array_column($heroes, 'celebrity_id'));
+    $ids = array_filter(array_column($heroes, 'place_id'));
     if (!empty($ids)) {
         $placeholders = implode(',', array_fill(0, count($ids), '?'));
-        $checkStmt = $pdo->prepare("SELECT id FROM mashahir_celebrities WHERE id IN ($placeholders) AND is_active = 1");
+        $checkStmt = $pdo->prepare("SELECT id FROM places WHERE id IN ($placeholders) AND is_active = 1");
         $checkStmt->execute(array_values($ids));
         $existingIds = $checkStmt->fetchAll(PDO::FETCH_COLUMN);
     }
 }
 
-$profileBase = $is_fa ? '/Kavian/mashahir/persian/profile.php' : '/Kavian/mashahir/english/profile.php';
+$profileBase = $is_fa ? '/Kavian/places/persian/profile.php' : '/Kavian/places/english/profile.php';
 ?>
 
 <header class="hero-section">
@@ -46,7 +46,7 @@ $profileBase = $is_fa ? '/Kavian/mashahir/persian/profile.php' : '/Kavian/mashah
                         <h1><?= $is_fa ? $hero['title_fa'] : $hero['title_en'] ?></h1>
                         <?php
                         $subtitle = $is_fa ? $hero['subtitle_fa'] : $hero['subtitle_en'];
-                        $celId    = $hero['celebrity_id'];
+                        $celId    = $hero['place_id'];
                         $exists   = $celId && in_array($celId, $existingIds);
                         $notFoundMsg = $is_fa ? 'این شخص در پایگاه داده یافت نشد' : 'This person was not found in the database';
                         ?>

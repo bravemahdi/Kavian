@@ -15,10 +15,10 @@ $reviewSql = "SELECT
     r.hashtags,
     r.likes_count,
     r.created_at,
-    mc.name_en as celebrity_name_en,
-    mc.name_fa as celebrity_name_fa
-FROM mashahir_reviews r
-LEFT JOIN mashahir_celebrities mc ON r.celebrity_id = mc.id
+    mc.name_en as place_name_en,
+    mc.name_fa as place_name_fa
+FROM places_reviews r
+LEFT JOIN places mc ON r.place_id = mc.id
 WHERE r.is_active = 1 AND r.lang = ?
 ORDER BY RAND()
 LIMIT 6";
@@ -28,7 +28,7 @@ $reviewStmt->execute([$lang_filter]);
 $reviews = $reviewStmt->fetchAll(PDO::FETCH_ASSOC);
 
 $title = $is_fa ? 'نظرات کاربران' : 'User Reviews';
-$desc  = $is_fa ? 'تجربیات و نظرات دوستداران فرهنگ و ادب ایران' : 'Experiences and opinions of Iranian culture and literature enthusiasts';
+$desc  = $is_fa ? 'نظرات و تجربیات دوستداران ایران زمین' : 'Experiences and opinions of Iran Lovers';
 
 $colors = ['#00796B', '#8B1538', '#1E4FA1', '#FF5722', '#4CAF50', '#9C27B0'];
 
@@ -65,7 +65,7 @@ $totalChunks  = count($chunks);
                                         </div>
                                         <div>
                                             <h4><?= htmlspecialchars($review['author_name']) ?></h4>
-                                            <span><?= $is_fa ? ($review['celebrity_name_fa'] ?? 'کاربر') : ($review['celebrity_name_en'] ?? 'User') ?></span>
+                                            <span><?= $is_fa ? ($review['place_name_fa'] ?? 'کاربر') : ($review['place_name_en'] ?? 'User') ?></span>
                                         </div>
                                     </div>
                                     <div class="review-slider-rating">
@@ -130,7 +130,7 @@ $totalChunks  = count($chunks);
                                 </div>
                                 <div>
                                     <h4><?= htmlspecialchars($review['author_name']) ?></h4>
-                                    <span><?= $is_fa ? ($review['celebrity_name_fa'] ?? 'کاربر') : ($review['celebrity_name_en'] ?? 'User') ?></span>
+                                    <span><?= $is_fa ? ($review['place_name_fa'] ?? 'کاربر') : ($review['place_name_en'] ?? 'User') ?></span>
                                 </div>
                             </div>
                             <div class="review-slider-rating">
